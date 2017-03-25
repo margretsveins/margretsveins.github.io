@@ -33,7 +33,7 @@
                  .range([h-padding, padding]);
     var rScale = d3.scale.linear()
                  .domain([0, d3.max(dataset, function(d) {return d['Category'];})])
-                 .range([2,5]);
+                 .range([1,30]);
 
   //Create SVG element
   var svg = d3.select("body")
