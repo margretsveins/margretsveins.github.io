@@ -2,11 +2,25 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<title>D3: Loading data from a CSV file</title>
+		<title> Assignment 2</title>
 		<script type="text/javascript" src="../d3/d3.js"></script>
-	</head>
+		<style type="text/css">
+			.axis path,
+			.axis line {
+				fill:none;
+				stroke: black;
+				shape-rendering: crispEdges;
+			}
+			.axis text {
+				font-family: sans-serif;
+				font-size: 11px;
+			}
+
+			</style>
+		</head>
 	<body>
 		<script type="text/javascript">
+			var data;
 			d3.csv("DataSet2003", function(data) {
 			data.forEach(function(d) {
 				d.Category = +d.Category;
@@ -15,6 +29,71 @@
 			  });
 				console.log(data);
 			});
+			//Width and height
+			var w = 500;
+			var h = 300;
+			var padding = 20;
+			// Create scale functions
+			var xScale = d3.scale.linear()
+					 .domain([0, d3.max(data, function(d) { return d['NumPros']; })])
+					 .range([padding, w - padding * 2]);
+
+			var yScale = d3.scale.linear()
+		 				.domain([0, d3.max(data, function(d) { return d['NumVehicle']; })])
+		 				.range([h - padding, padding]);
+
+			var rScale = d3.scale.linear()
+						.domain([0, d3.max(data, function(d) {return d['Category']; })])
+						.range([1, 30]);
+
+		 var svg = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+	 	 var xAxis = d3.svg.axis()
+						.scale(xScale)
+						.orient("bottom");
+
+//Create the circles
+			svg.selectAll("circle")
+			   .data(data)
+			   .enter()
+			   .append("circle")
+
+			    .attr("cx", function(d) {
+			   		return xScale(d['NumPros']);
+			     })
+				.attr("cy", function(d) {
+			   		return yScale(d['NumVehicle']);
+			     })
+			     .attr("r", function(d) {
+			   	 	return rScale(d['Category']);
+			   });
+				 //Set the coordinates for the text labels
+	 			svg.selectAll("text")
+	 			   .data(data)
+	 			   .enter()
+	 			   .append("text")
+	 			   .text(function(d) {
+	 			    	return d['NumPros'] + "," + d['NumVehicle'];
+	 		   	   })
+	 		   	   .attr("x", function(d) {
+	 			   		return xScale(d['NumPros']);
+	 			   })
+	 			   .attr("y", function(d) {
+	 			   		return yScale(d['NumVehicle']);
+	 			   })
+	 			   .attr("font-family", "sans-serif")
+	 			   .attr("font-size", "11px")
+	 			   .attr("fill", "red");
+
+	 			   //Call the axis function
+	 			   svg.append("g")
+	 			   			. attr("class", "axis")
+	 			   			. attr("transform", "translate(0," + (h-padding) + ")")
+	 			   			.call(xAxis);
+
 		</script>
 	</body>
 </html>
