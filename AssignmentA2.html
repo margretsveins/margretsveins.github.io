@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Loading data from a CSV file</title>
+		<script type="text/javascript" src="../d3/d3.js"></script>
+	</head>
+	<body>
+		<script type="text/javascript">
+    var dataset;
+		d3.csv("DataSet2003.csv", function(dataset) {
+		// Strings to number
+      dataset.forEach(function(d) {
+            d.Category = +d.Category;
+            d.NumPros = +d.NumPros;
+            d.NumVehicle = +d.NumVehicle;
+			});
+      console.log(dataset);
+
+
+    // Width and height
+    var w = 500;
+    var h = 300;
+    var padding = 20;
+
+    var xScale = d3.scale.linear()
+                .domain([0, Math.max(
+								d3.max(dataset, function(d) {return d['NumPros']+h; })
+								)])
+                .range([padding, w-padding * 2]);
+    var yScale = d3.scale.linear()
+                 .domain([0, d3.max(dataset, function(d) {return d['NumVehicle']; })])
+                 .range([h-padding, padding]);
+    var rScale = d3.scale.linear()
+                 .domain([0, d3.max(dataset, function(d) {return d['Category'];})])
+                 .range([2,5]);
+
+  //Create SVG element
+  var svg = d3.select("body")
+            .append("svg")
+            .attr("width", w)
+            .attr("height", h);
+
+  // Create axis function
+  var xAxis = d3.svg.axis()
+             .scale(xScale)
+            .orient("bottom");
+
+  //Create the circles
+  svg.selectAll("circle")
+      .data(dataset)
+      .enter()
+      .append("circle")
+
+      .attr("cx", function(d) {return xScale(d['NumPros']);})
+      .attr("cy", function(d) {return yScale(d['NumVehicle']);})
+      .attr("r", function(d)  {return rScale(d['Category']);});
+
+
+//Call the axis function
+  svg.append("g")
+    . attr("class", "axis")
+    . attr("transform", "translate(0," + (h-padding) + ")")
+    .call(xAxis);
+    });
+		</script>
+	</body>
+</html>
