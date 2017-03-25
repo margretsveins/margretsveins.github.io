@@ -20,30 +20,39 @@
 		</head>
 	<body>
 		<script type="text/javascript">
-			var data;
-			d3.csv("DataSet2003.csv", function(data) {
-			data.forEach(function(d) {
+			var dataset;
+			d3.csv("DataSet2003.csv", function(error,data) {
+				if (error){
+					console.log(error);
+				} else {
+					console.log(data);
+				}
+				dataset = data;
+				generateVis();
+				hideLoadingMsg();
+					}
+
+				dataset.forEach(function(d) {
 				d.Category = +d.Category;
 				d.NumPros = +d.NumPros;
 				d.NumVehicle = +d.NumVehicle;
-			  });
-				console.log(data);
-			});
+
+			 });
 			//Width and height
 			var w = 500;
 			var h = 300;
 			var padding = 20;
 			// Create scale functions
 			var xScale = d3.scale.linear()
-					 .domain([0, d3.max(data, function(d) { return d['NumPros']; })])
+					 .domain([0, d3.max(dataset, function(d) { return d['NumPros']; })])
 					 .range([padding, w - padding * 2]);
 
 			var yScale = d3.scale.linear()
-		 				.domain([0, d3.max(data, function(d) { return d['NumVehicle']; })])
+		 				.domain([0, d3.max(dataset, function(d) { return d['NumVehicle']; })])
 		 				.range([h - padding, padding]);
 
 			var rScale = d3.scale.linear()
-						.domain([0, d3.max(data, function(d) {return d['Category']; })])
+						.domain([0, d3.max(dataset, function(d) {return d['Category']; })])
 						.range([1, 30]);
 
 		 var svg = d3.select("body")
@@ -57,7 +66,7 @@
 
 //Create the circles
 			svg.selectAll("circle")
-			   .data(data)
+			   .data(dataset)
 			   .enter()
 			   .append("circle")
 
@@ -72,7 +81,7 @@
 			   });
 				 //Set the coordinates for the text labels
 	 			svg.selectAll("text")
-	 			   .data(data)
+	 			   .data(dataset)
 	 			   .enter()
 	 			   .append("text")
 	 			   .text(function(d) {
@@ -93,7 +102,7 @@
 	 			   			. attr("class", "axis")
 	 			   			. attr("transform", "translate(0," + (h-padding) + ")")
 	 			   			.call(xAxis);
-
-		</script>
+			 });
+			</script>
 	</body>
 </html>
