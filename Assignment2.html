@@ -7,11 +7,14 @@
 	</head>
 	<body>
 		<script type="text/javascript">
-
 			d3.csv("DataSet2003", function(data) {
+			data.forEach(function(d) {
+			    d.Category = +d.Category;
+					d.NumPros = +d.NumPros;
+					d.NumVehicle = +d.NumVehicle;
+			  });
 				console.log(data);
 			});
-
 		</script>
 	</body>
 </html>
