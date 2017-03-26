@@ -39,19 +39,20 @@
     var dataset;
 		var datayear = [2003,2015];
 
-		d3.select("body").selectAll("p")
+		d3.select("body").selectAll("p2")
 			.data(datayear)
 			.enter()
-			.append("p")
+			.append("p2")
 			.text(function(d) {
 				return "Push the botton and see result for year" + d;
 			})
 			.style("color", function(d) {
-				if (d > 2004) {	//Threshold of 15
+				if (d > 1) {	//Threshold of 15
 					return "red";
 				} else {
-					return "black";
+					return "blue";
 				}
+					});
 
 		d3.csv("DataSet2003.csv", function(dataset) {
 		// Strings to number
