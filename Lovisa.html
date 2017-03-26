@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: Adding data points (circles) to the map</title>
+		<script type="text/javascript" src="https://d3js.org/d3.v3.min.js"></script>
+		<script src="https://d3js.org/d3-collection.v1.min.js"></script>
+		<script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+		<script src="https://d3js.org/d3-dsv.v1.min.js"></script>
+		<script src="https://d3js.org/d3-request.v1.min.js"></script>
+		<script src="https://d3js.org/d3-queue.v3.min.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */
+		</style>
+	</head>
+	<body>
+
+    <button id="K2" class="kernelButton">K2</button>
+    <button id="K3" class="kernelButton">K3</button>
+    <button id="K4" class="kernelButton">K4</button>
+    <button id="K5" class="kernelButton">K5</button>
+    <button id="K6" class="kernelButton">K6</button>
+
+		<script type="text/javascript">
+			//Width and height
+			var w = 700;
+			var h = 700;
+			//Define map projection
+            var projection = d3.geo.mercator()
+                .center([-122.41819474198758, 37.774145825475955])
+                .scale(200000)
+                .translate([w / 2, h / 2]);
+
+			//Define path generator
+			var path = d3.geo.path()
+							 .projection(projection);
+
+			//Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+
+			var sanFran = svg.append("g");
+			var locations = svg.append("g");
+			var centers = svg.append("g");
+
+      var color = ['#0c0c0c','#9c9dab', '#1d384d', '#8dadde','#e9ebff'];
+
+
+                //Bind data and create one path per GeoJSON feature
+               d3.json("https://raw.githubusercontent.com/suneman/socialdataanalysis2017/master/files/sfpddistricts.geojson", function(json){
+               	sanFran.selectAll("path")
+                    .data(json.features)
+                    .enter()
+                    .append("path")
+                    .attr("d", path)
+                    .style("fill", "#E6E6E6")
+                    .attr('stroke-width',0.5)
+                    .attr('stroke',"#626262");
+
+				//Load in cities data
+
+				d3.csv("DataSet2B.csv", function(data_loc) {
+					console.log(json);
+					locations.selectAll("circle")
+					   .data(data_loc)
+					   .enter()
+					   .append("circle")
+					   .attr("cx", function(d) {
+						   return projection([d.X, d.Y])[0];
+					   })
+					   .attr("cy", function(d) {
+						   return projection([d.X, d.Y])[1];
+					   })
+					   .attr("r", 5)
+					   .style("fill", function(d){
+               var value = d.KMean4;
+               return color[value];
+               console.log(values);
+             })
+             .style("opacity",0.75);
+					});
+
+				d3.csv("DataSet2B_center.csv", function(data_center){
+					centers.selectAll("circle")
+						.data(data_center)
+						.enter()
+						.append("circle")
+						.attr("cx", function(d) {
+							return projection([+d.X_k4, +d.Y_k4])[0]
+							console.log(projection([d.X_k4, d.Y_k4])[0])
+						})
+						.attr("cy", function(d) {
+							return projection([+d.Y_k4, +d.Y_k4])[1]
+							console.log(projection([d.Y_k4, d.Y_k4])[1])
+						})
+						.attr("r", 10)
+            .style("fill", "red")
+            .attr("stroke", "black")
+					});
+
+					function drawLocation(k_ID) {
+						locations.selectAll("circle").remove()
+						d3.csv("DataSet2B.csv", function(data_loc) {
+							console.log(json);
+							locations.selectAll("circle")
+							   .data(data_loc)
+							   .enter()
+							   .append("circle")
+							   .attr("cx", function(d) {
+								   return projection([d.X, d.Y])[0];
+							   })
+							   .attr("cy", function(d) {
+								   return projection([d.X, d.Y])[1];
+							   })
+							   .attr("r", 5)
+							   .style("fill", function(d){
+		               var value = d.k_ID;
+		               return color[value];
+		               console.log(values);
+		             })
+		             .style("opacity",0.75);
+							});
+
+						}
+
+d3.selectAll(".kernelButton").on("click", function(){
+			buttonID = d3.select(this).attr("id")
+			drawLocation(buttonID)
+			console.log(buttonID)
+		});
+
+
+					});
+
+
+
+		</script>
+	</body>
+</html>
