@@ -31,6 +31,7 @@
 		p3 {
 			font-weight: bold;
 			text-align:center;
+			color:#00fa9a;
 			font-family: Helvetica, Arial, sans-serif;
 		}
 		p4 {
@@ -45,26 +46,9 @@
 		<h2> Assignment 2A: One scatter and two datasets </h2>
 		<p> Visualization of SF crime data. The radius of each point is poportional
 		to crime in that district. Push the botton and see result for:  </p>
-		<p3> Push the button and see result for </p3> <p4> year 2003 </p4>
-		<p2> Some test:  </p2>
+		<p2> Push the button and visulize data for </p2> <p4> year 2003 </p4><p2> or </p2><p3> year 2015.</p3>
 		<script type="text/javascript">
     var dataset;
-		var datayear = [2003,2015];
-
-		d3.select("body").selectAll("p2")
-			.data(datayear)
-			.enter()
-			.append("p2")
-			.text(function(d) {
-				return "year " + d ;
-			})
-			.style("color", function(d) {
-				if (d > 2004) {	//Threshold of 15
-					return "#00fa9a";
-				} else {
-					return "#8dadde";
-				}
-					});
 
 		d3.csv("DataSet2003.csv", function(dataset) {
 		// Strings to number
