@@ -21,8 +21,8 @@
 	<body>
 		<script type="text/javascript">
     // Width and height
-    var w = 800;
-    var h = 500;
+    var w = 600;
+    var h = 600;
 
 		var projection = d3.geo.mercator()
 				.center([-122.41819474198758, 37.774145825475955])
@@ -97,7 +97,7 @@
 																 return projection([d.lon, d.lat])[1];
 															 })
 															 .attr("r", 5)
-															 .style("fill", "coral")
+															 .style("fill", "blue")
 															 .style("opacity", 0.1);
 
 													});
