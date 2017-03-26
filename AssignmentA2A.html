@@ -182,12 +182,12 @@
 
         svg.append("text")
             .attr("x", (w / 2))
-            .attr("y", 30)
+            .attr("y", 25)
             .attr("text-anchor", "middle")
             .attr("fill", colors[2])
             .attr("font-family", "sans-serif")
             .style("font-size", "20px")
-            .text("what happens");
+            .text("Data from year <p4> 2003 </p4>");
 
         // now add titles to the axes
         svg.append("text")
@@ -234,7 +234,7 @@
 
         updateCircles (numpros, numvehicle, total,col);
         updateLabels (numpros, numvehicle, total,lcol);
-
+				updateTitle(year)
 
         });
 
@@ -273,9 +273,20 @@
                         .attr("font-size", "11px")
                         .attr("fill", lcol);
             }
-
-
-
+						function updateTitle (year){
+		                    svg.selectAll("text")
+		                        .data(dataset)
+		                        .transition()
+		                        .delay(100)
+		                        .duration(1200)
+														.text(function(d) {
+																return d['year'];
+														 })
+														 .attr("x", (w / 2))
+														 .attr("y", 25)
+														 .attr("font-family", "sans-serif")
+														 .attr("font-size", "11px")
+		            }
 
     });
         </script>
