@@ -5,19 +5,17 @@
 	<title> D3: Assignment 2</title>
 	<script type="text/javascript" src="../d3/d3.js"></script>
 	<style type="text/css">
-		.axis path,
-		.axis line {
+	.axis path,
+	.axis line {
 			fill:none;
 			stroke: black;
-			shape-rendering: crispEdges;
-		}
+			shape-rendering: auto;
+	}
 		.axis text {
 			font-family: sans-serif;
 			font-size: 11px;
 		}
-		.Viz{
-			text-align:center;
-		}
+
 		h2, p {
 			font-weight: bold;
 			text-align:center;
@@ -46,96 +44,218 @@
 		<h2> Assignment 2A: One scatter and two datasets </h2>
 		<p> Visualization of SF crime data. The radius of each point is poportional
 		to crime in that district. Push the botton and see result for:  </p>
-		<p2> Push the button and visulize data for </p2> <p4> year 2003 </p4><p2> or </p2><p3> year 2015.</p3>
-		<script type="text/javascript">
-    var dataset;
+		<p2> Push the button and visulize data for </p2><p4> year 2003 </p4><p2> or </p2><p3> year 2015.</p3>
 
-		d3.csv("DataSet2003.csv", function(dataset) {
-		// Strings to number
-      dataset.forEach(function(d) {
-            d.Category = +d.Category;
-            d.NumPros = +d.NumPros;
-            d.NumVehicle = +d.NumVehicle;
-			});
-      console.log(dataset);
+		<button id='id2003'> Click here to toggle between data from 2003 and 2015 </button>
 
+        <script type="text/javascript">
 
-    // Width and height
-    var w = 800;
-    var h = 500;
-    var padding = 50;
+        // Width and height
+        var w = 850;
+        var h = 600;
+        var padding = 80;
 
-    var xScale = d3.scale.linear()
-                .domain([0, Math.max(
-								d3.max(dataset, function(d) {return d['NumPros']; })
-								)])
-                .range([padding, w-padding * 2]);
-    var yScale = d3.scale.linear()
-                 .domain([0, d3.max(dataset, function(d) {return d['NumVehicle']; })])
-                 .range([h-padding, padding]);
-    var rScale = d3.scale.linear()
-                 .domain([0, d3.max(dataset, function(d) {return d['Category'];})])
-                 .range([1,10]);
+        // Colors
+        var colors = ['#0c0c0c','#9c9dab', '#1d384d', '#8dadde','#e9ebff'];
+        var colors2 = ['#2e8b57', '#00fa9a']
 
-  //Create SVG element
-  var svg = d3.select("body")
-            .append("svg")
-            .attr("width", w)
-            .attr("height", h);
-
-  // Create axis function
-  var xAxis = d3.svg.axis()
-             .scale(xScale)
-            .orient("bottom")
-						.ticks(10);
-
-	var yAxis = d3.svg.axis()
-						.scale(yScale)
-						.orient("left")
-						.ticks(8);
+        var dataset;
+            d3.csv("DataSet.csv", function(dataset) {
+            // Strings to number
+            dataset.forEach(function(d) {
+                d.Total_2003 = +d.Total_2003;
+                d.Total_2015 = +d.Total_2015;
+                d.NumPros_2003 = +d.NumPros_2003;
+                d.NumPros_2015 = +d.NumPros_2015;
+                d.NumVehicle_2003 = +d.NumVehicle_2003;
+                d.NumVehicle_2015 = +d.NumVehicle_2015;
+             });
+            console.log(dataset);
 
 
-  //Create the circles
-  svg.selectAll("circle")
-      .data(dataset)
-      .enter()
-      .append("circle")
+        // Create the scales
+        var xScale = d3.scale.linear()
+                    .domain([0, Math.max(
+                                    d3.max(dataset, function(d) {return d['NumPros_2003']; }),
+                                    d3.max(dataset, function(d) {return d['NumPros_2015']; })
+                                )])
+                    .range([padding*1.5, w-padding*2]);
 
-      .attr("cx", function(d) {return xScale(d['NumPros']);})
-      .attr("cy", function(d) {return yScale(d['NumVehicle']);})
-      .attr("r", function(d)  {return rScale(d['Category']);});
+        var yScale = d3.scale.linear()
+                     .domain([0,  Math.max(
+                                    d3.max(dataset, function(d) {return d['NumVehicle_2003']; }),
+                                    d3.max(dataset, function(d) {return d['NumVehicle_2003']; })
+                                )])
+                    .range([h-padding, padding]);
+        var rScale = d3.scale.linear()
+                     .domain([0, Math.max(
+                                    d3.max(dataset, function(d) {return d['Total_2003']; }),
+                                    d3.max(dataset, function(d) {return d['Total_2003']; })
+                                )])
+                    .range([0.5,15]);
 
-//Set the coordinates for the text labels
-		svg.selectAll("text")
-			.data(dataset)
-	   	.enter()
-			.append("text")
-			.text(function(d) {
-			return d['PdDistrict'];
-		   	 })
-		   	 .attr("x", function(d) {
-			   		return xScale(d['NumPros']);
-			   })
-			   .attr("y", function(d) {
-			   		return yScale(d['NumVehicle']);
-			   })
-				 .attr('opacity',0.9)
-			   .attr("font-family", "sans-serif")
-			   .attr("font-size", "11px")
-			   .attr("fill", "black");
+        // Create the axis
+        var xAxis = d3.svg.axis()
+                .scale(xScale)
+                .orient("bottom")
+                .ticks(10);
 
-//Call the axis function
-  svg.append("g")
-    . attr("class", "axis")
-    . attr("transform", "translate(0," + (h-padding) + ")")
-    .call(xAxis);
+        var yAxis = d3.svg.axis()
+                .scale(yScale)
+                .orient("left")
+                .ticks(8);
 
-	svg.append("g")
-	  . attr("class", "axis")
-	  . attr("transform", "translate(" + padding + ",0)")
-	  .call(yAxis);
+        //Create SVG element
+        var svg = d3.select("body")
+                .append("svg")
+                .attr("width", w)
+                .attr("height", h)
+                .attr("fill", colors[0])
+                ;
+
+
+        //Create the circles
+        var circles = svg.selectAll("circle")
+                .data(dataset)
+                .enter()
+                .append("circle")
+                .attr("fill", colors[3])
+                .attr("stroke", colors[0])
+                .attr("cx", function(d) {return xScale(d['NumPros_2003']);})
+                .attr("cy", function(d) {return yScale(d['NumVehicle_2003']);})
+                .attr("r", function(d)  {return rScale(d['Total_2003']);})
+
+        var year = '2003'
+
+        //Create labels
+        var labels = svg.selectAll("text")
+                .data(dataset)
+                .enter()
+                .append("text")
+                .text(function(d) {
+                    return d['PdDistrict'];
+             })
+                .attr("x", function(d) {
+                    return xScale(d['NumPros_2003'])+d["Total_2003"]/2000;
+            })
+               .attr("y", function(d) {
+                    return yScale(d['NumVehicle_2003'])-d["Total_2003"]/2000;
+               })
+               .attr("font-family", "sans-serif")
+               .attr("font-size", "11px")
+               .attr("fill", colors[2]);
+
+
+        //Create X-axis
+        svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(0," + (h-padding) + ")")
+                .call(xAxis);
+
+        //Create Y-axis
+        svg.append("g")
+                .attr("class", "axis")
+                .attr("transform", "translate(" + padding + ",0)")
+                .call(yAxis);
+
+        svg.append("text")
+            .attr("x", (w / 2))
+            .attr("y", 30)
+            .attr("text-anchor", "middle")
+            .attr("fill", colors[2])
+            .attr("font-family", "sans-serif")
+            .style("font-size", "20px")
+            .text("Title");
+
+        // now add titles to the axes
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", "translate("+ (w/2-20) +","+(h-20)+")")
+            .text("Number of PROSTITUTION incidents");
+
+        svg.append("text")
+            .attr("text-anchor", "middle")
+            .attr("transform", "translate("+ (padding/4) +","+(h/2)+")rotate(-90)")
+            .text("Number of VEHICLE THEFT incidents");
+
+
+        // Update on click
+        d3.select("button")
+                .on("click", function() {
+
+        var button_id = d3.select(this).attr("id");
+
+        if (button_id == 'id2003') {
+
+                    d3.select(this).attr('id','id2015')
+                    year = '2015';
+                    numpros = 'NumPros_2015';
+                    numvehicle = 'NumVehicle_2015';
+                    total = 'Total_2015';
+                    col = colors2[1];
+                    lcol = colors2[0];
+
+
+        }
+
+        else if (button_id=='id2015') {
+                    d3.select(this).attr('id','id2003')
+                    year = '2003';
+                    numpros = 'NumPros_2003';
+                    numvehicle = 'NumVehicle_2003';
+                    total = 'Total_2003';
+                    col = colors[3];
+                    lcol = colors[2];
+        }
+        else  {
+                console.log('Error')}
+
+        updateCircles (numpros, numvehicle, total,col);
+        updateLabels (numpros, numvehicle, total,lcol);
+
+
+        });
+
+
+        function updateCircles (numpros, numvehicle, total,col) {
+                    svg.selectAll("circle")
+                        .data(dataset)
+                        .transition()
+                        .delay(100)
+                        .duration(1000)
+                        // .each("start", function() { d3.select(this).attr("fill", "magenta");})
+                        .attr("cx", function(d) {return xScale(d[numpros]);})
+                        .attr("cy", function(d) {return yScale(d[numvehicle]);})
+                        .attr("r", function(d)  {return rScale(d[total]);})
+                        .attr("fill", col)
+                        .attr("stroke", lcol);
+
+            }
+
+        function updateLabels (numpros, numvehicle, total,lcol){
+                    svg.selectAll("text")
+                        .data(dataset)
+                        .transition()
+                        .delay(100)
+                        .duration(1200)
+                        .text(function(d) {
+                            return d['PdDistrict'];
+                         })
+                        .attr("x", function(d) {
+                            return xScale(d[numpros])+d["Total_2003"]/2000;
+                         })
+                        .attr("y", function(d) {
+                            return yScale(d[numvehicle])-d["Total_2003"]/2000;
+                         })
+                        .attr("font-family", "sans-serif")
+                        .attr("font-size", "11px")
+                        .attr("fill", lcol);
+            }
+
+
+
 
     });
-		</script>
-	</body>
+        </script>
+    </body>
 </html>
