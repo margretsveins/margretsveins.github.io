@@ -33,7 +33,7 @@
 
     // Width and height
     var w = 800;
-    var h = 600;
+    var h = 500;
     var padding = 50;
 
     var xScale = d3.scale.linear()
@@ -58,7 +58,7 @@
   var xAxis = d3.svg.axis()
              .scale(xScale)
             .orient("bottom")
-						.ticks(12);
+						.ticks(10);
 
 	var yAxis = d3.svg.axis()
 						.scale(yScale)
