@@ -33,7 +33,7 @@
 
 		var map = svg.append("g");
 		var coordinates = svg.append("g");
-		var means = svg.append("g");
+		var meancenter = svg.append("g");
 
 		d3.json("https://raw.githubusercontent.com/suneman/socialdataanalysis2017/master/files/sfpddistricts.geojson", function(json){
 		//d3.json("us-states.json", function(json) {
@@ -41,48 +41,48 @@
 		map.selectAll("path")
 					.data(json.features)
 					.enter()
-														.append("path")
-														.attr("d", path)
-														.style("fill", "#E6E6E6")
-														.attr('stroke-width',0.3)
-														.attr('stroke',"#626262");
+					.append("path")
+					.attr("d", path)
+					.style("fill", "#E6E6E6")
+					.attr('stroke-width',0.3)
+					.attr('stroke',"#626262");
 
-													//Load in cities data
-													d3.csv("DataSet2B.csv", function(data_coordinates) {
-														console.log(json);
-														coordinates.selectAll("circle")
-															 .data(data_coordinates)
-															 .enter()
-															 .append("circle")
-															 .attr("cx", function(d) {
-																 return projection([d.X, d.X])[0];
-															 })
-															 .attr("cy", function(d) {
-																 return projection([d.X, d.Y])[1];
-															 })
-															 .attr("r", 5)
-															 .style("fill", "#2e8b57")
-															 .style("opacity", 0.5);
-													});
+		//Load in cities data
+		d3.csv("DataSet2B.csv", function(data_coordinates) {
+			console.log(json);
+			coordinates.selectAll("circle")
+				 .data(data_coordinates)
+				 .enter()
+				 .append("circle")
+				 .attr("cx", function(d) {
+					 return projection([d.X, d.X])[0];
+				 })
+				 .attr("cy", function(d) {
+					 return projection([d.X, d.Y])[1];
+				 })
+				 .attr("r", 5)
+				 .style("fill", "#2e8b57")
+				 .style("opacity", 0.5);
+		});
 
-													d3.csv("DataSet2B_center.csv", function(data_means){
-														means.selectAll("circle")
-															.data(data_means)
-															.enter()
-															.append("circle")
-															.attr("cx", function(d) {
-																return projection([+d.X_k6, +d.Y_k6])[0]
-																console.log(projection([d.X_k2, d.Y_k2])[0])
-															})
-															.attr("cy", function(d) {
-																return projection([+d.Y_k6, +d.Y_k6])[1]
-																console.log(projection([d.Y_k2, d.Y_k2])[1])
-															})
-															.attr("r", 10)
-															.style("fill", "black");
-														});
+		d3.csv("DataSet2B_center.csv", function(data_means){
+			meancenter.selectAll("circle")
+				.data(data_means)
+				.enter()
+				.append("circle")
+				.attr("cx", function(d) {
+					return projection([+d.X_k6, +d.Y_k6])[0]
+					console.log(projection([d.X_k2, d.Y_k2])[0])
+				})
+				.attr("cy", function(d) {
+					return projection([+d.Y_k6, +d.Y_k6])[1]
+					console.log(projection([d.Y_k2, d.Y_k2])[1])
+				})
+				.attr("r", 10)
+				.style("fill", "black");
+		});
 
-													});
+	});
 		</script>
 	</body>
 </html>
