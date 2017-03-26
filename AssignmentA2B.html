@@ -65,9 +65,9 @@
 															 .style("opacity", 0.5);
 													});
 
-													d3.csv("DataSet2B_center.csv", function(data_center){
-														centers.selectAll("circle")
-															.data(data_center)
+													d3.csv("DataSet2B_center.csv", function(data_means){
+														means.selectAll("circle")
+															.data(data_means)
 															.enter()
 															.append("circle")
 															.attr("cx", function(d) {
