@@ -34,7 +34,8 @@
 	<body>
 		<h2> Assignment 2A: One scatter and two datasets </h2>
 		<p> Visualization of SF crime data. The radius of each point is poportional
-		to crime in that district. Push the botton and see result for  </p>
+		to crime in that district. Push the botton and see result for:  </p>
+		<p2> Some test:  </p2>
 		<script type="text/javascript">
     var dataset;
 		var datayear = [2003,2015];
@@ -44,7 +45,7 @@
 			.enter()
 			.append("p2")
 			.text(function(d) {
-				return "year" + d;
+				return "year " + d ;
 			})
 			.style("color", function(d) {
 				if (d > 2004) {	//Threshold of 15
