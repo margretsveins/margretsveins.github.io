@@ -38,7 +38,7 @@
 
     var xScale = d3.scale.linear()
                 .domain([0, Math.max(
-								d3.max(dataset, function(d) {return d['NumPros']+h; })
+								d3.max(dataset, function(d) {return d['NumPros']; })
 								)])
                 .range([padding, w-padding * 2]);
     var yScale = d3.scale.linear()
