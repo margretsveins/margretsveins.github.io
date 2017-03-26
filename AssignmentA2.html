@@ -33,7 +33,7 @@
 
     // Width and height
     var w = 800;
-    var h = 400;
+    var h = 600;
     var padding = 50;
 
     var xScale = d3.scale.linear()
@@ -57,11 +57,13 @@
   // Create axis function
   var xAxis = d3.svg.axis()
              .scale(xScale)
-            .orient("bottom");
+            .orient("bottom")
+						.ticks(12);
 
 	var yAxis = d3.svg.axis()
 						.scale(yScale)
-						.orient("left");
+						.orient("left")
+						.ticks(8);
 
 
   //Create the circles
