@@ -10,46 +10,48 @@
 </head>
 	<body>
 		<script type="text/javascript">
+
     // Width and height
     var w = 600;
     var h = 600;
 
+		//Define map projection
 		var projection = d3.geo.mercator()
 				.center([-122.41819474198758, 37.774145825475955])
 				.scale(180000)
 				.translate([w / 2, h / 2]);
 
-				//Define path generator
+		//Define path generator
 		var path = d3.geo.path()
 				.projection(projection);
 
   //Create SVG element
-  var svg = d3.select("body")
+  	var svg = d3.select("body")
             .append("svg")
             .attr("width", w)
             .attr("height", h);
 
-						var sanFran = svg.append("g");
-						var locations = svg.append("g");
-						var centers = svg.append("g");
+		var map = svg.append("g");
+		var coordinates = svg.append("g");
+		var means = svg.append("g");
 
-							d3.json("https://raw.githubusercontent.com/suneman/socialdataanalysis2017/master/files/sfpddistricts.geojson", function(json){
-									//d3.json("us-states.json", function(json) {
-											//Bind data and create one path per GeoJSON feature
-											sanFran.selectAll("path")
-													.data(json.features)
-													.enter()
-													.append("path")
-													.attr("d", path)
-													.style("fill", "#E6E6E6")
-													.attr('stroke-width',0.3)
-													.attr('stroke',"#626262");
+		d3.json("https://raw.githubusercontent.com/suneman/socialdataanalysis2017/master/files/sfpddistricts.geojson", function(json){
+		//d3.json("us-states.json", function(json) {
+	  //Bind data and create one path per GeoJSON feature
+		map.selectAll("path")
+					.data(json.features)
+					.enter()
+														.append("path")
+														.attr("d", path)
+														.style("fill", "#E6E6E6")
+														.attr('stroke-width',0.3)
+														.attr('stroke',"#626262");
 
 													//Load in cities data
-													d3.csv("DataSet2B.csv", function(data_loc) {
+													d3.csv("DataSet2B.csv", function(data_coordinates) {
 														console.log(json);
-														locations.selectAll("circle")
-															 .data(data_loc)
+														coordinates.selectAll("circle")
+															 .data(data_coordinates)
 															 .enter()
 															 .append("circle")
 															 .attr("cx", function(d) {
@@ -59,13 +61,13 @@
 																 return projection([d.X, d.Y])[1];
 															 })
 															 .attr("r", 5)
-															 .style("fill", "blue")
+															 .style("fill", "#2e8b57")
 															 .style("opacity", 0.1);
 													});
 
-													d3.csv("dfCentersXY.csv", function(data_center){
-														centers.selectAll("circle")
-															.data(data_center)
+													d3.csv("dfCentersXY.csv", function(data_means){
+														means.selectAll("circle")
+															.data(data_means)
 															.enter()
 															.append("circle")
 															.attr("cx", function(d) {
