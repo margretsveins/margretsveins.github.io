@@ -187,7 +187,6 @@
             .attr("fill", colors[2])
             .attr("font-family", "sans-serif")
             .style("font-size", "20px")
-						.attr("fill", colors[2])
             .text("Data from year 2003");
 
         // now add titles to the axes
@@ -286,9 +285,10 @@
 														 })
 														 .attr("x", (w / 2))
 														 .attr("y", 25)
-														 .attr("font-family", "sans-serif")
-														 .attr("font-size", "11px")
-														 .attr("fill", lcol);
+														 .attr("text-anchor", "middle")
+						 								.attr("fill", colors[2])
+						 								.attr("font-family", "sans-serif")
+						 								.style("font-size", "20px");
 		            }
 
     });
