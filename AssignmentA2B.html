@@ -2,7 +2,7 @@
 <html lang="en">
 	<head>
 	<meta charset="utf-8">
-	<title> D3: Assignment 2</title>
+	<title> D3: Assignment 2B</title>
 	<script type="text/javascript" src="../d3/d3.js"></script>
 	<style type="text/css">
 		.axis path,
@@ -20,33 +20,18 @@
 </head>
 	<body>
 		<script type="text/javascript">
-    var dataset;
-		d3.csv("DataSet2003.csv", function(dataset) {
-		// Strings to number
-      dataset.forEach(function(d) {
-            d.Category = +d.Category;
-            d.NumPros = +d.NumPros;
-            d.NumVehicle = +d.NumVehicle;
-			});
-      console.log(dataset);
-
-
     // Width and height
     var w = 800;
     var h = 500;
-    var padding = 50;
 
-    var xScale = d3.scale.linear()
-                .domain([0, Math.max(
-								d3.max(dataset, function(d) {return d['NumPros']; })
-								)])
-                .range([padding, w-padding * 2]);
-    var yScale = d3.scale.linear()
-                 .domain([0, d3.max(dataset, function(d) {return d['NumVehicle']; })])
-                 .range([h-padding, padding]);
-    var rScale = d3.scale.linear()
-                 .domain([0, d3.max(dataset, function(d) {return d['Category'];})])
-                 .range([1,10]);
+		var projection = d3.geo.mercator()
+				.center([-122.41819474198758, 37.774145825475955])
+				.scale(180000)
+				.translate([w / 2, h / 2]);
+
+				//Define path generator
+		var path = d3.geo.path()
+				.projection(projection);
 
   //Create SVG element
   var svg = d3.select("body")
@@ -54,59 +39,83 @@
             .attr("width", w)
             .attr("height", h);
 
-  // Create axis function
-  var xAxis = d3.svg.axis()
-             .scale(xScale)
-            .orient("bottom")
-						.ticks(10);
 
-	var yAxis = d3.svg.axis()
-						.scale(yScale)
-						.orient("left")
-						.ticks(8);
+						var dict = {
+							location: [],
+							knn2: [[-122.41721258127922, 37.78739426221802],
+							[-122.41924311718914, 37.76000421665213]],
+							knn3: [[-122.41582476469686, 37.761346056903406],
+							[-122.41709742374232, 37.78742454987841],
+							[-122.47811474903897, 37.73890648569841]],
+							knn4: [[-122.41708247002195, 37.78742711884176],
+							[-122.4157933283197, 37.76144681116217],
+							[-122.46632498052548, 37.718814247089576],
+							[-122.48639782848089, 37.75857230467054]],
+							knn5: [[-122.41584224261476, 37.76142569868439],
+							[-122.41876997704011, 37.78765447103969],
+							[-122.46632498052548, 37.718814247089576],
+							[-122.48639782848089, 37.75857230467054],
+							[-122.4045346858759, 37.78553068672912]],
+							knn6: [[-122.41584104423832, 37.7614223162626],
+							[-122.41734574019395, 37.78626408225128],
+							[-122.48653563661559, 37.7584929825487],
+							[-122.46632498052548, 37.718814247089576],
+							[-122.40357635664827, 37.785479856299915],
+							[-122.42168637567067, 37.790816208502285]]}
+
+							d3.json("https://raw.githubusercontent.com/suneman/socialdataanalysis2017/master/files/sfpddistricts.geojson", function(json){
+									//d3.json("us-states.json", function(json) {
+											//Bind data and create one path per GeoJSON feature
+											svg.selectAll("path")
+													.data(json.features)
+													.enter()
+													.append("path")
+													.attr("d", path)
+													.style("fill", "#E6E6E6")
+													.attr('stroke-width',0.3)
+													.attr('stroke',"#626262");
+
+													var knn6 = [[-122.41584104423832, 37.7614223162626],
+																[-122.41734574019395, 37.78626408225128],
+																[-122.48653563661559, 37.7584929825487],
+																[-122.46632498052548, 37.718814247089576],
+																[-122.40357635664827, 37.785479856299915],
+																[-122.42168637567067, 37.790816208502285]];
 
 
-  //Create the circles
-  svg.selectAll("circle")
-      .data(dataset)
-      .enter()
-      .append("circle")
+													//Load in cities data
+													d3.csv("locations-WHATUP.csv", function(data) {
+														console.log(json);
+														svg.selectAll("circle")
+															 .data(data)
+															 .enter()
+															 .append("circle")
+															 .attr("cx", function(d) {
+																 return projection([d.lon, d.lat])[0];
+															 })
+															 .attr("cy", function(d) {
+																 return projection([d.lon, d.lat])[1];
+															 })
+															 .attr("r", 5)
+															 .style("fill", "coral")
+															 .style("opacity", 0.1);
 
-      .attr("cx", function(d) {return xScale(d['NumPros']);})
-      .attr("cy", function(d) {return yScale(d['NumVehicle']);})
-      .attr("r", function(d)  {return rScale(d['Category']);});
+													});
 
-//Set the coordinates for the text labels
-		svg.selectAll("text")
-			.data(dataset)
-	   	.enter()
-			.append("text")
-			.text(function(d) {
-			return d['PdDistrict'];
-		   	 })
-		   	 .attr("x", function(d) {
-			   		return xScale(d['NumPros']);
-			   })
-			   .attr("y", function(d) {
-			   		return yScale(d['NumVehicle']);
-			   })
-				 .attr('opacity',0.9)
-			   .attr("font-family", "sans-serif")
-			   .attr("font-size", "11px")
-			   .attr("fill", "black");
+													svg.selectAll("circle")
+														 .data(knn6)
+														 .enter()
+														 .append("circle")
+														 .attr("cx", function(d) {
+																return projection(d)[0];
+														 })
+														 .attr("cy", function(d) {
+																return projection(d)[1];
+														 })
+														 .attr("r", 20)
+																 .style("fill", "yellow").focus();
 
-//Call the axis function
-  svg.append("g")
-    . attr("class", "axis")
-    . attr("transform", "translate(0," + (h-padding) + ")")
-    .call(xAxis);
-
-	svg.append("g")
-	  . attr("class", "axis")
-	  . attr("transform", "translate(" + padding + ",0)")
-	  .call(yAxis);
-
-    });
+													});
 		</script>
 	</body>
 </html>
