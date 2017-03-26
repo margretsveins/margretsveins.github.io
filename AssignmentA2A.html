@@ -23,6 +23,11 @@
 			text-align:center;
 			font-family: Helvetica, Arial, sans-serif;
 		}
+		p2 {
+			font-weight: bold;
+			text-align:center;
+			font-family: Helvetica, Arial, sans-serif;
+		}
 
 	</style>
 </head>
@@ -32,6 +37,22 @@
 		to crime in that district </p>
 		<script type="text/javascript">
     var dataset;
+		var datayear = [2003,2015];
+
+		d3.select("body").selectAll("p")
+			.data(datayear)
+			.enter()
+			.append("p")
+			.text(function(d) {
+				return "Push the botton and see result for year" + d;
+			})
+			.style("color", function(d) {
+				if (d > 2004) {	//Threshold of 15
+					return "red";
+				} else {
+					return "black";
+				}
+
 		d3.csv("DataSet2003.csv", function(dataset) {
 		// Strings to number
       dataset.forEach(function(d) {
