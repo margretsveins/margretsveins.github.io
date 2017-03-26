@@ -65,18 +65,18 @@
 															 .style("opacity", 0.5);
 													});
 
-													d3.csv("dfCentersXY.csv", function(data_means){
-														means.selectAll("circle")
-															.data(data_means)
+													d3.csv("DataSet2B_center.csv", function(data_center){
+														centers.selectAll("circle")
+															.data(data_center)
 															.enter()
 															.append("circle")
 															.attr("cx", function(d) {
-																return projection([+d.sixX, +d.sixY])[0]
-																console.log(projection([d.twoX, d.twoY])[0])
+																return projection([+d.X_k6, +d.Y_k6])[0]
+																console.log(projection([d.X_k2, d.Y_k2])[0])
 															})
 															.attr("cy", function(d) {
-																return projection([+d.sixX, +d.sixY])[1]
-																console.log(projection([d.twoX, d.twoY])[1])
+																return projection([+d.Y_k6, +d.Y_k6])[1]
+																console.log(projection([d.Y_k2, d.Y_k2])[1])
 															})
 															.attr("r", 10)
 															.style("fill", "black");
