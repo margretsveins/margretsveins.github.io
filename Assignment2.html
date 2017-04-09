@@ -9,393 +9,466 @@
     <script type="text/javascript" src="../d3/d3.js"></script>
         <style type="text/css">
 
-            .axis path,
-            .axis line {
-                fill:none;
-                stroke: black;
-                shape-rendering: auto;
-            }
-            .axis text {
-                font-family: sans-serif;
-                font-size: 11px;
-            }
+				.axis path,
+				.axis line {
+						fill:none;
+						stroke: black;
+						shape-rendering: auto;
+				}
+				.axis text {
+						font-family: sans-serif;
+						font-size: 11px;
+				}
 
-            .axes  {
-                font-family: sans-serif;
-                font-size: 18px;
-            }
+				.axes  {
+						font-family: sans-serif;
+						font-size: 18px;
+				}
 
-            .labels {
-                font-family: sans-serif;
-                font-size: 11px;
-                font-weight: bold;
+				.labels {
+						font-family: sans-serif;
+						font-size: 11px;
+						font-weight: bold;
 
-            }
-
-
-            strong{
-                font-family: Helvetica, Arial, sans-serif;
-            }
-
-            text, h1, h2, p, strong {
-                font-family: Helvetica, Arial, sans-serif;
-                text-align:center;
-            }
-
-            p2 {
-                text-align:center;
-                font-family: Helvetica, Arial, sans-serif;
-            }
-            p3 {
-                font-weight: bold;
-                text-align:center;
-                color:#00fa9a;
-                font-family: Helvetica, Arial, sans-serif;
-            }
-            p4 {
-                font-weight: bold;
-                text-align:center;
-                color: #8dadde;
-                font-family: Helvetica, Arial, sans-serif;
-            }
-
-            .section {
-                width: 1200px;
-                height: 300px;
-                margin: auto;
-                text-align: center;
-            }
-
-            .Viz{
-                text-align: center;
-            }
+				}
 
 
+				strong{
+						font-family: Helvetica, Arial, sans-serif;
+				}
+
+				text, h1, h2, p, strong {
+						font-family: Helvetica, Arial, sans-serif;
+						text-align:center;
+				}
+
+				p2 {
+						text-align:center;
+						font-family: Helvetica, Arial, sans-serif;
+				}
+				p3 {
+						font-weight: bold;
+						text-align:center;
+						color:#00fa9a;
+						font-family: Helvetica, Arial, sans-serif;
+				}
+				p4 {
+						font-weight: bold;
+						text-align:center;
+						color: #8dadde;
+						font-family: Helvetica, Arial, sans-serif;
+				}
+
+				.section {
+						width: 1200px;
+						height: 300px;
+						margin: auto;
+						text-align: center;
+				}
+
+				.Viz{
+						text-align: center;
+				}
 
 
-            button {
-                margin: 0 auto;
-                background-color:#ededed;
-                -moz-border-radius:6px;
-                -webkit-border-radius:6px;
-                border-radius:6px;
-                border:1px solid #dcdcdc;
-                display:inline-block;
-                cursor:pointer;
-                color:#000000;
-                font-size:15px;
-                font-weight:bold;
-                padding:6px 24px;
-                text-decoration:none;
-             }
 
-    </style>
+
+				button {
+						margin: 0 auto;
+						background-color:#ededed;
+						-moz-border-radius:6px;
+						-webkit-border-radius:6px;
+						border-radius:6px;
+						border:1px solid #dcdcdc;
+						display:inline-block;
+						cursor:pointer;
+						color:#000000;
+						font-size:15px;
+						font-weight:bold;
+						padding:6px 24px;
+						text-decoration:none;
+				 }
+
+</style>
 </head>
-    <body>
+<body>
 
-        <div>
-            <div class="section">
-                    <h2> Assignment 2A: One scatter and two datasets </h2>
-                    <p>The scatter plot below helps us visualizing the total number of crime in San Fransisco with respect to prostitution and vehicle theft crime in the years 2003 and 2015. The x-axis corresponds to the total number of prostitution incidents and the y-axis to the total number of vehicle theft incidents. The size of the circles are proportional to the total number of crime in each district. <br> </p>
-                <div>
-                <strong> Explain in your own words why you think I want the axes to be the same for both years? <br> </strong>
-                        <p2>When toggling between years 2003 and 2015, it's easy to see that the number of prostitution and vehicle theft crimes decreases significantly when going from 2003 to 2015 , although the total number of crime in each area remains pretty much the same. It's easy to see that the size of the circles are constant while their position changes quite a lot. Thus, keeping the axes constant for both years is a major key for this visualization, as its purpose is to illustrate how the prostitution and vehicle theft crime rates decreases while total crime rate remains the same.<br> </p2>
-               </div>
-               <div><br>
+		<div>
+				<div class="section">
+								<h2> Assignment 2A: One scatter and two datasets </h2>
+								<p>The scatter plot below helps us visualizing the total number of crime in San Fransisco with respect to prostitution and vehicle theft crime in the years 2003 and 2015. The x-axis corresponds to the total number of prostitution incidents and the y-axis to the total number of vehicle theft incidents. The size of the circles are proportional to the total number of crime in each district. <br> </p>
+						<div>
+						<strong> Explain in your own words why you think I want the axes to be the same for both years? <br> </strong>
+										<p2>When toggling between years 2003 and 2015, it's easy to see that the number of prostitution and vehicle theft crimes decreases significantly when going from 2003 to 2015 , although the total number of crime in each area remains pretty much the same. It's easy to see that the size of the circles are constant while their position changes quite a lot. Thus, keeping the axes constant for both years is a major key for this visualization, as its purpose is to illustrate how the prostitution and vehicle theft crime rates decreases while total crime rate remains the same.<br> </p2>
+					 </div>
+					 <div><br>
 
-                        <button id='id2003'>  Click to toggle between data from <p4> 2003 </p4> and <p3> 2015.</p3></button>
-                        </div>
-             </div>
-                <div class ="viz1 Viz"></div>
+										<button id='id2003'>  Click to toggle between data from <p4> 2003 </p4> and <p3> 2015.</p3></button>
+										</div>
+				 </div>
+						<div class ="viz1 Viz"></div>
 
-        </div>
-
-
-
-    <div>
-        <div class="section">
-             <h2> Assignment 2B</h2>
-            <p>The map shows a geoplot of San Francisco. On the map we visualise K-means clustering, for K = 2,.., 6.  The buttons below represent how many clusters, with a centroid, will be shown. The centroids are represented with a large coloured circle and the clustered data is the same colour as the corresponding centroid.</p>
-            <strong>Why is the size of the file important?</strong>
-             <p>  We want to keep the file as small as possible. The data is read each time a button is clicked. We want the delay time to be as low as possible, so it is obvious that if the size of the data is smaller, then the site will upload faster. Our data is approximately 750 KB, so we expect it to lag a little, but not immensely.</p>
-
-              <button id="KMean2" class="kernelButton">K2</button>
-              <button id="KMean3" class="kernelButton">K3</button>
-              <button id="KMean4" class="kernelButton">K4</button>
-              <button id="KMean5" class="kernelButton">K5</button>
-              <button id="KMean6" class="kernelButton">K6</button>
-
-        </div>
-
-        <div class ="viz2 Viz"></div>
-    </div>
-
-        <script type="text/javascript">
-
-        // Width and height
-        var w = 1000;
-        var h = 600;
-        var padding = 80;
-
-        // Colors
-        var colors = ['#0c0c0c','#9c9dab', '#1d384d', '#8dadde','#e9ebff'];
-        var colors2 = ['#2e8b57', '#00fa9a']
-
-        var dataset;
-            d3.csv("DataSet.csv", function(dataset) {
-            // Strings to number
-            dataset.forEach(function(d) {
-                d.Total_2003 = +d.Total_2003;
-                d.Total_2015 = +d.Total_2015;
-                d.NumPros_2003 = +d.NumPros_2003;
-                d.NumPros_2015 = +d.NumPros_2015;
-                d.NumVehicle_2003 = +d.NumVehicle_2003;
-                d.NumVehicle_2015 = +d.NumVehicle_2015;
-             });
-            console.log(dataset);
+		</div>
 
 
-        // Create the scales
-        var xScale = d3.scale.linear()
-                    .domain([0, Math.max(
-                                    d3.max(dataset, function(d) {return d['NumPros_2003']; }),
-                                    d3.max(dataset, function(d) {return d['NumPros_2015']; })
-                                )])
-                    .range([padding*1.5, w-padding*2]);
 
-        var yScale = d3.scale.linear()
-                     .domain([0,  Math.max(
-                                    d3.max(dataset, function(d) {return d['NumVehicle_2003']; }),
-                                    d3.max(dataset, function(d) {return d['NumVehicle_2003']; })
-                                )])
-                    .range([h-padding, padding]);
-        var rScale = d3.scale.linear()
-                     .domain([0, Math.max(
-                                    d3.max(dataset, function(d) {return d['Total_2003']; }),
-                                    d3.max(dataset, function(d) {return d['Total_2003']; })
-                                )])
-                    .range([0.5,15]);
+<div>
+		<div class="section">
+				 <h2> Assignment 2B</h2>
+				<p>The map shows a geoplot of San Francisco. On the map we visualise K-means clustering, for K = 2,.., 6.  The buttons below represent how many clusters, with a centroid, will be shown. The centroids are represented with a large coloured circle and the clustered data is the same colour as the corresponding centroid.</p>
+				<strong>Why is the size of the file important?</strong>
+				 <p>  We want to keep the file as small as possible. The data is read each time a button is clicked. We want the delay time to be as low as possible, so it is obvious that if the size of the data is smaller, then the site will upload faster. Our data is approximately 750 KB, so we expect it to lag a little, but not immensely.</p>
 
-        // Create the axis
-        var xAxis = d3.svg.axis()
-                .scale(xScale)
-                .orient("bottom")
-                .ticks(10);
+					<button id="KMean2" class="kernelButton">K2</button>
+					<button id="KMean3" class="kernelButton">K3</button>
+					<button id="KMean4" class="kernelButton">K4</button>
+					<button id="KMean5" class="kernelButton">K5</button>
+					<button id="KMean6" class="kernelButton">K6</button>
 
-        var yAxis = d3.svg.axis()
-                .scale(yScale)
-                .orient("left")
-                .ticks(8);
+		</div>
 
-        //Create SVG element
-        var svg = d3.select(".viz1")
-                .append("svg")
-                .attr("width", w)
-                .attr("height", h)
-                .attr("fill", colors[0])
-                ;
+		<div class ="viz2 Viz"></div>
+</div>
 
+		<script type="text/javascript">
 
-        //Create the circles
-        var circles = svg.selectAll("circle")
-                .data(dataset)
-                .enter()
-                .append("circle")
-                .attr("fill", colors[3])
-                .attr("stroke", colors[0])
-                .attr("cx", function(d) {return xScale(d['NumPros_2003']);})
-                .attr("cy", function(d) {return yScale(d['NumVehicle_2003']);})
-                .attr("r", function(d)  {return rScale(d['Total_2003']);})
+		// Width and height
+		var w = 1000;
+		var h = 600;
+		var padding = 80;
 
-        var year = '2003'
+		// Colors
+		var colors = ['#0c0c0c','#9c9dab', '#1d384d', '#8dadde','#e9ebff'];
+		var colors2 = ['#2e8b57', '#00fa9a']
 
-        //Create labels
-        var labels = svg.selectAll("text")
-                .data(dataset)
-                .enter()
-                .append("text")
-                .text(function(d) {
-                    return d['PdDistrict'];
-             })
-                .attr("x", function(d) {
-                    return xScale(d['NumPros_2003'])+d["Total_2003"]/2000;
-            })
-               .attr("y", function(d) {
-                    return yScale(d['NumVehicle_2003'])-d["Total_2003"]/2000;
-               })
-               .attr("class", "labels")
-               .attr("fill", colors[2]);
+		var dataset;
+				d3.csv("DataSet.csv", function(dataset) {
+				// Strings to number
+				dataset.forEach(function(d) {
+						d.Total_2003 = +d.Total_2003;
+						d.Total_2015 = +d.Total_2015;
+						d.NumPros_2003 = +d.NumPros_2003;
+						d.NumPros_2015 = +d.NumPros_2015;
+						d.NumVehicle_2003 = +d.NumVehicle_2003;
+						d.NumVehicle_2015 = +d.NumVehicle_2015;
+				 });
+				console.log(dataset);
 
 
-        //Create X-axis
-        svg.append("g")
-                .attr("class", "axis")
-                .attr("transform", "translate(0," + (h-padding) + ")")
-                .call(xAxis);
+		// Create the scales
+		var xScale = d3.scale.linear()
+								.domain([0, Math.max(
+																d3.max(dataset, function(d) {return d['NumPros_2003']; }),
+																d3.max(dataset, function(d) {return d['NumPros_2015']; })
+														)])
+								.range([padding*1.5, w-padding*2]);
 
-        //Create Y-axis
-        svg.append("g")
-                .attr("class", "axis")
-                .attr("transform", "translate(" + padding + ",0)")
-                .call(yAxis);
+		var yScale = d3.scale.linear()
+								 .domain([0,  Math.max(
+																d3.max(dataset, function(d) {return d['NumVehicle_2003']; }),
+																d3.max(dataset, function(d) {return d['NumVehicle_2003']; })
+														)])
+								.range([h-padding, padding]);
+		var rScale = d3.scale.linear()
+								 .domain([0, Math.max(
+																d3.max(dataset, function(d) {return d['Total_2003']; }),
+																d3.max(dataset, function(d) {return d['Total_2003']; })
+														)])
+								.range([0.5,15]);
 
+		// Create the axis
+		var xAxis = d3.svg.axis()
+						.scale(xScale)
+						.orient("bottom")
+						.ticks(10);
 
-        // Add a title to the graph
-        var title = svg.append("text")
-            .attr("x", (w / 2))
-            .attr("y", 30)
-            .attr("text-anchor", "middle")
-            .attr("fill", colors[2])
-            .attr("font-family", "sans-serif")
-            .style("font-size", "20px")
-            .text("San Francisco crimes in 2003");
+		var yAxis = d3.svg.axis()
+						.scale(yScale)
+						.orient("left")
+						.ticks(8);
 
-        // now add titles to the axes
-        svg.append("text")
-            .attr("text-anchor", "middle")
-            .attr("transform", "translate("+ (w/2-20) +","+(h-20)+")")
-            .attr("class", "axes")
-            .attr("fill", colors[2])
-            .text("Number of PROSTITUTION incidents");
-
-
-        svg.append("text")
-            .attr("text-anchor", "middle")
-            .attr("transform", "translate("+ (padding/4) +","+(h/2)+")rotate(-90)")
-            .attr("class", "axes")
-            .attr("fill", colors[2])
-            .text("Number of VEHICLE THEFT incidents");
-
-
-        // Update on click
-        d3.select("button")
-                .on("click", function() {
-
-        var button_id = d3.select(this).attr("id");
-
-        if (button_id == 'id2003') {
-
-                    d3.select(this).attr('id','id2015')
-                    year = '2015';
-                    numpros = 'NumPros_2015';
-                    numvehicle = 'NumVehicle_2015';
-                    total = 'Total_2015';
-                    col = colors2[1];
-                    lcol = colors2[0];
+		//Create SVG element
+		var svg = d3.select(".viz1")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h)
+						.attr("fill", colors[0])
+						;
 
 
-        }
+		//Create the circles
+		var circles = svg.selectAll("circle")
+						.data(dataset)
+						.enter()
+						.append("circle")
+						.attr("fill", colors[3])
+						.attr("stroke", colors[0])
+						.attr("cx", function(d) {return xScale(d['NumPros_2003']);})
+						.attr("cy", function(d) {return yScale(d['NumVehicle_2003']);})
+						.attr("r", function(d)  {return rScale(d['Total_2003']);})
 
-        else if (button_id=='id2015') {
-                    d3.select(this).attr('id','id2003')
-                    year = '2003';
-                    numpros = 'NumPros_2003';
-                    numvehicle = 'NumVehicle_2003';
-                    total = 'Total_2003';
-                    col = colors[3];
-                    lcol = colors[2];
-        }
-        else  {
-                console.log('Error')}
+		var year = '2003'
 
-        updateCircles (numpros, numvehicle, total,col);
-        updateLabels (numpros, numvehicle, total,lcol);
-        updateTitle(year,lcol);
-
-
-        });
-
-
-        function updateCircles (numpros, numvehicle, total,col) {
-                    svg.selectAll("circle")
-                        .data(dataset)
-                        .transition()
-                        .delay(100)
-                        .duration(1000)
-                        .ease("linear")
-                        // .each("start", function() { d3.select(this).attr("fill", "magenta");})
-                        .attr("cx", function(d) {return xScale(d[numpros]);})
-                        .attr("cy", function(d) {return yScale(d[numvehicle]);})
-                        .attr("r", function(d)  {return rScale(d[total]);})
-                        .attr("fill", col)
-                        .attr("stroke", lcol);
-
-            }
-
-        function updateLabels (numpros, numvehicle, total,lcol){
-                    svg.selectAll("text")
-                        .data(dataset)
-                        .transition()
-                        .delay(100)
-                        .duration(1200)
-                        .ease("linear")
-                        .text(function(d) {
-                            return d['PdDistrict'];
-                         })
-                        .attr("x", function(d) {
-                            return xScale(d[numpros])+d["Total_2003"]/2000;
-                         })
-                        .attr("y", function(d) {
-                            return yScale(d[numvehicle])-d["Total_2003"]/2000;
-                         })
-                        .attr("fill", lcol);
-            }
-
-        function updateTitle (year, col) {
-                    title.transition()
-                        .duration(100)
-                        .ease("linear")
-                       .attr("x", (w / 2))
-                       .attr("y", 30)
-                       .attr("text-anchor", "middle")
-                       .attr("fill", col)
-                       .attr("font-family", "sans-serif")
-                       .style("font-size", "20px")
-                       .text('San Francisco crimes in ' + year)
-                        }
+		//Create labels
+		var labels = svg.selectAll("text")
+						.data(dataset)
+						.enter()
+						.append("text")
+						.text(function(d) {
+								return d['PdDistrict'];
+				 })
+						.attr("x", function(d) {
+								return xScale(d['NumPros_2003'])+d["Total_2003"]/2000;
+				})
+					 .attr("y", function(d) {
+								return yScale(d['NumVehicle_2003'])-d["Total_2003"]/2000;
+					 })
+					 .attr("class", "labels")
+					 .attr("fill", colors[2]);
 
 
-    });
+		//Create X-axis
+		svg.append("g")
+						.attr("class", "axis")
+						.attr("transform", "translate(0," + (h-padding) + ")")
+						.call(xAxis);
+
+		//Create Y-axis
+		svg.append("g")
+						.attr("class", "axis")
+						.attr("transform", "translate(" + padding + ",0)")
+						.call(yAxis);
+
+
+		// Add a title to the graph
+		var title = svg.append("text")
+				.attr("x", (w / 2))
+				.attr("y", 30)
+				.attr("text-anchor", "middle")
+				.attr("fill", colors[2])
+				.attr("font-family", "sans-serif")
+				.style("font-size", "20px")
+				.text("San Francisco crimes in 2003");
+
+		// now add titles to the axes
+		svg.append("text")
+				.attr("text-anchor", "middle")
+				.attr("transform", "translate("+ (w/2-20) +","+(h-20)+")")
+				.attr("class", "axes")
+				.attr("fill", colors[2])
+				.text("Number of PROSTITUTION incidents");
+
+
+		svg.append("text")
+				.attr("text-anchor", "middle")
+				.attr("transform", "translate("+ (padding/4) +","+(h/2)+")rotate(-90)")
+				.attr("class", "axes")
+				.attr("fill", colors[2])
+				.text("Number of VEHICLE THEFT incidents");
+
+
+		// Update on click
+		d3.select("button")
+						.on("click", function() {
+
+		var button_id = d3.select(this).attr("id");
+
+		if (button_id == 'id2003') {
+
+								d3.select(this).attr('id','id2015')
+								year = '2015';
+								numpros = 'NumPros_2015';
+								numvehicle = 'NumVehicle_2015';
+								total = 'Total_2015';
+								col = colors2[1];
+								lcol = colors2[0];
+
+
+		}
+
+		else if (button_id=='id2015') {
+								d3.select(this).attr('id','id2003')
+								year = '2003';
+								numpros = 'NumPros_2003';
+								numvehicle = 'NumVehicle_2003';
+								total = 'Total_2003';
+								col = colors[3];
+								lcol = colors[2];
+		}
+		else  {
+						console.log('Error')}
+
+		updateCircles (numpros, numvehicle, total,col);
+		updateLabels (numpros, numvehicle, total,lcol);
+		updateTitle(year,lcol);
+
+
+		});
+
+
+		function updateCircles (numpros, numvehicle, total,col) {
+								svg.selectAll("circle")
+										.data(dataset)
+										.transition()
+										.delay(100)
+										.duration(1000)
+										.ease("linear")
+										// .each("start", function() { d3.select(this).attr("fill", "magenta");})
+										.attr("cx", function(d) {return xScale(d[numpros]);})
+										.attr("cy", function(d) {return yScale(d[numvehicle]);})
+										.attr("r", function(d)  {return rScale(d[total]);})
+										.attr("fill", col)
+										.attr("stroke", lcol);
+
+				}
+
+		function updateLabels (numpros, numvehicle, total,lcol){
+								svg.selectAll("text")
+										.data(dataset)
+										.transition()
+										.delay(100)
+										.duration(1200)
+										.ease("linear")
+										.text(function(d) {
+												return d['PdDistrict'];
+										 })
+										.attr("x", function(d) {
+												return xScale(d[numpros])+d["Total_2003"]/2000;
+										 })
+										.attr("y", function(d) {
+												return yScale(d[numvehicle])-d["Total_2003"]/2000;
+										 })
+										.attr("fill", lcol);
+				}
+
+		function updateTitle (year, col) {
+								title.transition()
+										.duration(100)
+										.ease("linear")
+									 .attr("x", (w / 2))
+									 .attr("y", 30)
+									 .attr("text-anchor", "middle")
+									 .attr("fill", col)
+									 .attr("font-family", "sans-serif")
+									 .style("font-size", "20px")
+									 .text('San Francisco crimes in ' + year)
+										}
+
+
+});
 
 // ---------------------------------------------- Vizualization 2 ----------------------------------------------//
 
-            //Width and height
-            var w2 = 700;
-            var h = 700;
-            //Define map projection
-            var projection = d3.geo.mercator()
-                .center([-122.41819474198758, 37.774145825475955])
-                .scale(200000)
-                .translate([w2 / 2, h / 2]);
+				//Width and height
+				var w2 = 700;
+				var h = 700;
+				//Define map projection
+				var projection = d3.geo.mercator()
+						.center([-122.41819474198758, 37.774145825475955])
+						.scale(200000)
+						.translate([w2 / 2, h / 2]);
 
-            //Define path generator
-            var path = d3.geo.path()
-                             .projection(projection);
+				//Define path generator
+				var path = d3.geo.path()
+												 .projection(projection);
 
-            //Create SVG element
-            var svg = d3.select(".viz2")
-                        .append("svg")
-                        .attr("width", w2)
-                        .attr("height", h);
+				//Create SVG element
+				var svg = d3.select(".viz2")
+										.append("svg")
+										.attr("width", w2)
+										.attr("height", h);
+
+				var sanFran = svg.append("g");
+				var locations = svg.append("g");
+				var centers = svg.append("g");
 
 
 
-      var color = ['#4286f4','#f47d41', '#f4f441', '#41f441','#eb41f4','red'];
+	var color = ['#4286f4','#f47d41', '#f4f441', '#41f441','#eb41f4','red'];
 
 
-                //Bind data and create one path per GeoJSON feature
-               d3.json("https://raw.githubusercontent.com/suneman/socialdataanalysis2017/master/files/sfpddistricts.geojson", function(json){
-                sanFran.selectAll("path")
-                    .data(json.features)
-                    .enter()
-                    .append("path")
-                    .attr("d", path)
-                    .style("fill", "#E6E6E6")
-                    .attr('stroke-width',0.5)
-                    .attr('stroke',"#626262");
+						//Bind data and create one path per GeoJSON feature
+					 d3.json("https://raw.githubusercontent.com/suneman/socialdataanalysis2017/master/files/sfpddistricts.geojson", function(json){
+						sanFran.selectAll("path")
+								.data(json.features)
+								.enter()
+								.append("path")
+								.attr("d", path)
+								.style("fill", "#E6E6E6")
+								.attr('stroke-width',0.5)
+								.attr('stroke',"#626262");
 
-            });
+						//Draw the location data points and the kmeans center points
+						drawLocation('KMean2');
+						drawCenters('KMean2');
 
-        </script>
-    </body>
+						function drawLocation(k_ID) {
+										locations.selectAll("circle").remove()
+										d3.csv("DataSet2B_final.csv", function(data_loc) {
+												console.log(json);
+												locations.selectAll("circle")
+													 .data(data_loc)
+													 .enter()
+													 .append("circle")
+													 .attr("cx", function(d) {
+															 return projection([d.X, d.Y])[0];
+													 })
+													 .attr("cy", function(d) {
+															 return projection([d.X, d.Y])[1];
+													 })
+													 .attr("r", 5)
+													 .style("fill", function(d){
+									 var value = d[k_ID];
+																 return color[value];
+								 })
+								 .style("opacity",0.75);
+												});
+										}
+
+										function drawCenters(k_ID) {
+												centers.selectAll("circle").remove()
+												d3.csv("DataSet2B_center_final.csv", function(data_center){
+														centers.selectAll("circle")
+																.data(data_center)
+																.enter()
+																.append("circle")
+																.attr("cx", function(d) {
+																		return projection([+d['X_'+k_ID], +d['Y_'+k_ID]])[0]
+																})
+																.attr("cy", function(d) {
+																		return projection([+d['X_'+k_ID], +d['Y_'+k_ID]])[1]
+																})
+																.attr("r", 10)
+																.style("fill", function(d){
+																 var value = d['Color_'+k_ID];
+																 return color[value];
+															 })
+										.attr("stroke", "black")
+														});
+												}
+
+
+
+d3.selectAll(".kernelButton").on("click", function(){
+				buttonID = d3.select(this).attr("id")
+				drawLocation(buttonID)
+				drawCenters(buttonID)
+				console.log(buttonID)
+				});
+
+		// Add a title to the graph
+		var title = svg.append("text")
+				.attr("x", (w2 / 2))
+				.attr("y", 30)
+				.attr("text-anchor", "middle")
+				.attr("fill", colors[2])
+				.attr("font-family", "sans-serif")
+				.style("font-size", "20px")
+				.text("K-means clustering for prostitution in SF");
+
+
+				});
+
+		</script>
+</body>
 </html>
