@@ -395,53 +395,8 @@
 								.attr('stroke',"#626262");
 
 						//Draw the location data points and the kmeans center points
-						drawLocation('KMean2');
-						drawCenters('KMean2');
 
-						function drawLocation(k_ID) {
-										locations.selectAll("circle").remove()
-										d3.csv("DataSet2B_final.csv", function(data_loc) {
-												console.log(json);
-												locations.selectAll("circle")
-													 .data(data_loc)
-													 .enter()
-													 .append("circle")
-													 .attr("cx", function(d) {
-															 return projection([d.X, d.Y])[0];
-													 })
-													 .attr("cy", function(d) {
-															 return projection([d.X, d.Y])[1];
-													 })
-													 .attr("r", 5)
-													 .style("fill", function(d){
-									 var value = d[k_ID];
-																 return color[value];
-								 })
-								 .style("opacity",0.75);
-												});
-										}
 
-										function drawCenters(k_ID) {
-												centers.selectAll("circle").remove()
-												d3.csv("DataSet2B_center_final.csv", function(data_center){
-														centers.selectAll("circle")
-																.data(data_center)
-																.enter()
-																.append("circle")
-																.attr("cx", function(d) {
-																		return projection([+d['X_'+k_ID], +d['Y_'+k_ID]])[0]
-																})
-																.attr("cy", function(d) {
-																		return projection([+d['X_'+k_ID], +d['Y_'+k_ID]])[1]
-																})
-																.attr("r", 10)
-																.style("fill", function(d){
-																 var value = d['Color_'+k_ID];
-																 return color[value];
-															 })
-										.attr("stroke", "black")
-														});
-												}
 
 
 		// Add a title to the graph
