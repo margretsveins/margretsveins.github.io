@@ -119,11 +119,7 @@
 				<strong>Why is the size of the file important?</strong>
 				 <p>  We want to keep the file as small as possible. The data is read each time a button is clicked. We want the delay time to be as low as possible, so it is obvious that if the size of the data is smaller, then the site will upload faster. Our data is approximately 750 KB, so we expect it to lag a little, but not immensely.</p>
 
-					<button id="KMean2" class="kernelButton">K2</button>
-					<button id="KMean3" class="kernelButton">K3</button>
-					<button id="KMean4" class="kernelButton">K4</button>
-					<button id="KMean5" class="kernelButton">K5</button>
-					<button id="KMean6" class="kernelButton">K6</button>
+
 
 		</div>
 
@@ -447,14 +443,6 @@
 														});
 												}
 
-
-
-d3.selectAll(".kernelButton").on("click", function(){
-				buttonID = d3.select(this).attr("id")
-				drawLocation(buttonID)
-				drawCenters(buttonID)
-				console.log(buttonID)
-				});
 
 		// Add a title to the graph
 		var title = svg.append("text")
